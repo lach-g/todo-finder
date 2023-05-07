@@ -28,37 +28,44 @@ Notes:
 int main(int argc, char *argv[])
 {
   char* entry_dir;
-  struct dirent *dir_contents[DIR_MAX_FILES];
+  set_entry_dir(argc, argv, entry_dir);
 
-  if (argc > 1)
-  {
-    entry_dir = argv[1];
-  }
+  int complete = run_finder(entry_dir);
+  if (complete)
+    printf("## INFO: Indexing for %s directory complete.\n", entry_dir);
   else
-  {
-    // TODO - Change this to automatically use the current users home directory
+    printf("## ERROR: Failed indexing for %s directory.\n", entry_dir);
+
+}
+
+void set_entry_dir(int argc, char *argv[], char *entry_dir)
+{
+  if (argc > 1)
+    entry_dir = argv[1];
+  else
     if ((entry_dir = getenv("HOME")) == NULL)
       entry_dir = getpwuid(getuid())->pw_dir;
-  }
+}
 
+int run_finder(char *current_dir)
+{
   // Get list of entry dir objects
-  int num_contents = get_dir_contents(entry_dir, dir_contents);
+  struct dirent *dir_contents[DIR_MAX_FILES];
+  int num_contents = get_dir_contents(current_dir, dir_contents);
 
   // TODO - Parse each valid file in entry dir for TODOs
 
-  // TODO - Create master list of subdirectories and use as a stack (read learning -> C -> 21st... -> back up to C/glib-notes... )
+  // TODO - Create master list of subdirectories and use as a stack (read
+  // learning -> C -> 21st... -> back up to C/glib-notes... )
 
-  while (has_subdirs(dir_contents, num_contents))
-  {
-    printf("## Info: %s directory has subdirectories.\n", entry_dir);
+  while (has_subdirs(dir_contents, num_contents)) {
+    printf("## Info: %s directory has subdirectories.\n", current_dir);
 
     // TODO Add subdirectories to stack
 
     // TODO Call recursive function with directory at top of stack
-
   }
-  printf("## Info: %s directory is a leaf node.\n", entry_dir);
-
+  printf("## Info: %s directory is a leaf node.\n", current_dir);
 
   return 0;
 }
