@@ -3,7 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
+#include <pwd.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #define DIR_MAX_FILES 10000
 #define __USE_MISC 1

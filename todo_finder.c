@@ -1,4 +1,5 @@
-#include "file_reader.h"
+#include "todo_finder.h"
+#include <stdlib.h>
 
 /**
 
@@ -36,7 +37,8 @@ int main(int argc, char *argv[])
   else
   {
     // TODO - Change this to automatically use the current users home directory
-    entry_dir = "/home/lach";
+    if ((entry_dir = getenv("HOME")) == NULL)
+      entry_dir = getpwuid(getuid())->pw_dir;
   }
 
   // Get list of entry dir objects
@@ -88,7 +90,6 @@ int get_dir_contents(const char* chosen_dir, struct dirent *contents[])
   }
 
   closedir(dr);
-  sprint(".", ".", 0);
   return count;
 }
 

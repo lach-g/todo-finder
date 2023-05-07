@@ -1,3 +1,0 @@
-This is a test file
-// TODO: Test to do where the whole line should be recorded
-Some stuff...
