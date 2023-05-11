@@ -1,0 +1,28 @@
+            _______        _         _____                _           
+          |__   __|      | |       |  __ \              | |          
+              | | ___   __| | ___   | |__) |___  __ _  __| | ___ _ __ 
+              | |/ _ \ / _` |/ _ \  |  _  // _ \/ _` |/ _` |/ _ \ '__|
+              | | (_) | (_| | (_) | | | \ \  __/ (_| | (_| |  __/ |   
+              |_|\___/ \__,_|\___/  |_|  \_\___|\__,_|\__,_|\___|_|
+
+================================================================================
+============================ Expected behaviour ================================
+================================================================================
+
+Input:
+- Nothing
+Output:
+- Recursively read all files in /home/<current_user> dir for TODO phrase
+- For each match record file name, line number, and TODO line in
+/home/<current_user>/TODOs/todos.<md | org>
+
+Input:
+- '/some/file/path' [-md | -org]
+Output:
+- Recursively read all files in ./<current_dir> for TODO phrase
+- For each match record file name, line number, and TODO line in
+./<current_dir>/.todos.<md | org>
+
+Notes:
+- File paths check for relative or absolute
+- Use two different todo_writers with common interface, default is md
